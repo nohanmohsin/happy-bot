@@ -24,7 +24,7 @@ const client = new Discord.Client({
     partials: ['MESSAGE', 'REACTION', 'CHANNEL']
 });
 //games modules
-const { tictactoe, hangman } = require('reconlx')
+const { tictactoe, hangman, chatBot } = require('reconlx')
 
 client.on('ready', ()=> {
     client.channels.fetch('821986130995576866')
@@ -50,7 +50,7 @@ client.on('message', msg => {
         have fun!!*
         **7 commands**`, inline: true },
         {name: '👀Info', value: `*using these commands you can get to know about the server and the staff*
-        **⚒ in development**`, inline: true},
+        **2 commands**`, inline: true},
         { name: `🎮**Games**
         `, value: `*fun games will be available for you guys to enjoy and earn money*
         **2 commands**`, inline: true }
@@ -64,6 +64,9 @@ client.on('message', msg => {
         {name: `🕵️‍♂️Report`, value: `setup events or get roles to get notified for events you wanna join in
         **1 command**`, inline: true}
       )
+      // .addFields(
+        
+      // )
       msg.channel.send(helpEmbed)
     }
 
@@ -175,7 +178,7 @@ client.on('message', msg => {
     }
 
     //catpics command
-    if(msg.content.toLowerCase() === '+catpic'){
+    if(msg.content.toLowerCase().startsWith('+catpic')){
       fetch('https://api.thecatapi.com/v1/images/search')
       .then(res => res.json())
       .then(data => {
@@ -184,6 +187,11 @@ client.on('message', msg => {
       })
       
     }
+
+    //topic command
+    // if(msg.content.toLowerCase().startsWith('+topic')){
+      
+    // }
 
     //SUGGESTIONS section
     
@@ -197,6 +205,8 @@ client.on('message', msg => {
       msg.channel.send('Suggestion added successfully :3 thank you very much')
     }
     
+    //REPORT SECTION
+
     //report command 
     if(msg.content.toLowerCase().startsWith('+report') && msg.mentions.users.first() && msg.content.split(/\s+/).join('').length > 10 + msg.mentions.users.first().id.length){
       msg.channel.send('yes')
@@ -257,6 +267,7 @@ client.on('message', msg => {
         options.insert(randomNumber - 1, data.results[0].correct_answer); 
 
         const triviaEmbed = new Discord.MessageEmbed()
+        .setColor('#E7BB00')
         .setDescription(data.results[0].question)
         .addField(`1. ${options[0]}`, '⠀')
         .addField(`2. ${options[1]}`, '⠀')
@@ -291,6 +302,39 @@ client.on('message', msg => {
         })
         
       })
+
+    }
+
+    //INFO SECTION
+
+    //info server command
+    if(msg.content.toLowerCase().startsWith('+info server')){
+      const serverInfoEmbed= new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Info about our server')
+      .setDescription(`₊˚꒷꒦Have a great time ${msg.author}  here in The Happy Team . . . feel free to chat with others! also please don't forget to read the rules!^^. you can chat with others in revamping. . . ! and you can even try to level up by chatting! or you can grind from different bots! there are a lot you can do in revamping. . . ! I got to go now see ya and have fun!!₊˚꒷꒦`)
+      msg.channel.send(serverInfoEmbed)
+    }
+
+    //info mod command
+    if(msg.content.toLowerCase().startsWith('+info mod')){
+     
+      
+      const Members = msg.guild.members.cache.filter(mem => mem.roles.cache.find(role => role.id == '822075908231659550')).map(member => member.user.username);
+      
+      const modInfoEmbed = new Discord.MessageEmbed()
+      .setTitle('Our Current Mods and Developers')
+      .setColor('#E7BB00')
+      .setDescription(Members.join('\n'))
+      msg.channel.send(modInfoEmbed);
+      
+
+    }
+
+    //chatbot command
+    if(msg.content.toLowerCase().startsWith('+chatbot')){
+      
+      chatBot(msg, msg.content.slice(8))
     }
 })
 //welcome message
