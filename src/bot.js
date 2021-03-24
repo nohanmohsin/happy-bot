@@ -18,6 +18,11 @@ minutes = minutes < 10 ? '0'+minutes : minutes;
 
 const botToken=process.env.BOT_TOKEN;
 
+let newsToday = []
+
+const topics = [
+  'Who was your best friend in elementary school?', 'How often do you check your phone?', 'Records, tapes, CDs, MP3s, streaming. Which did you grow up with? What is good and bad about each?', 'What would you want your last meal to be if you were on death row?', 'What is your guilty pleasure?', 'What was the biggest thing you have ever won?', 'What are your plans for this weekend?', 'What did you do on your last vacation?', 'How much do you plan for the future?', 'What do you think about game shows? Do you have a favorite one?', 'Where is the most relaxing place you have been?', 'When was the last time you worked incredibly hard?', 'What foods do you absolutely hate?', 'What is your favorite cuisine or type of food?', 'What kind of interior do you like a restaurant to have?  ', 'Do you prefer traveling alone or with a group?', 'Who is your oldest friend? Where did you meet them?', 'Which season are you most active in?  ', 'What movie scene choked you up the most?', 'Do you prefer to go off the beaten path when you travel?', 'Who is your favorite athlete?'
+]
 
 const Discord = require('discord.js')
 const client = new Discord.Client({
@@ -25,6 +30,10 @@ const client = new Discord.Client({
 });
 //games modules
 const { tictactoe, hangman, chatBot } = require('reconlx')
+
+//voice-channel modules
+var discordjsVoicerole = require("discordjs-voicerole");
+const { default: VoiceRoleManager } = require('discordjs-voicerole');
 
 client.on('ready', ()=> {
     client.channels.fetch('821986130995576866')
@@ -34,7 +43,22 @@ client.on('ready', ()=> {
     client.user.setActivity("The Happy Team", {
       type: "LISTENING"
     })
+    // fetch(`http://api.mediastack.com/v1/news?access_key=24dbc01b98da2b04eb20ede5a5ec9d38&countries=us,gb,de&date=${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`)
+    // .then(res => res.json())
+    // .then(news => {
+    //   console.log(`${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`);
+    //   newsToday = news.data;
+    // })
 })
+
+const manager = new VoiceRoleManager({
+  "821986130995576867": "824225704606040065"
+});
+
+//using this event to give roles to members when they join vc
+client.on('voiceStateUpdate', (old, cur) => manager.trigger(old, cur));
+
+
 client.on('message', msg => {
     //help command
     if(msg.content.toLowerCase() === '+help'){
@@ -48,12 +72,12 @@ client.on('message', msg => {
         { name: `🎈**Fun Commands/fun**
         `, value: `*all the fun commands you can use
         have fun!!*
-        **7 commands**`, inline: true },
+        **9 commands**`, inline: true },
         {name: '👀Info', value: `*using these commands you can get to know about the server and the staff*
-        **2 commands**`, inline: true},
+        **3 commands**`, inline: true},
         { name: `🎮**Games**
         `, value: `*fun games will be available for you guys to enjoy and earn money*
-        **2 commands**`, inline: true }
+        **3 commands**`, inline: true }
       )
       .addField(`\u200B`,'\u200B')
       .addFields(
@@ -79,6 +103,7 @@ client.on('message', msg => {
       .setTitle('Game Commands')
       .addField('1. ``+tictactoe {mention}``', 'play tictactoe with a friend....**second player is necessary**')
       .addField('2. ``+hangman``', 'play hangman 🪂')
+      .addField('3. ``+trivia``', 'play some trivia and check your big brain XD')
       msg.channel.send(helpGameEmbed)
     }
     
@@ -96,7 +121,21 @@ client.on('message', msg => {
       .addField('5. ``+fact``', 'get a random fact')
       .addField('6. ``+meme``', 'get a meme to laugh at')
       .addField('7. ``+catpic``', 'get a cute catpic')
+      .addField(`8. go chat with our bot in the chatbot channel :3`)
+      .addField('9, ``+topic``', 'get a random topic if you are bored or you have nothing to talk about ')
       msg.channel.send(helpFunEmbed)
+    }
+
+    //help info command
+    if(msg.content.toLowerCase().startsWith('+help info')){
+      //embed message 
+      const infoHelpEmbed= new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Info commands')
+      .setDescription('get to know more about our server or our staff or get some news for today')
+      .addField('1. ``+info server``', 'get to know more about our server by using this command')
+      .addField('2. ``+info mod``', 'learn about our current staff members')
+      .addField('3. ``+news``', 'learn about the global news ( currently turned off)')
     }
     //avatar command
     if (msg.content.toLowerCase() === '+avatar') {
@@ -188,10 +227,21 @@ client.on('message', msg => {
       
     }
 
-    //topic command
-    // if(msg.content.toLowerCase().startsWith('+topic')){
+    //chatbot command
+    if(msg.channel.id == '824177838206353428'){
+      if(msg.author.bot) return;
+      else{
+        chatBot(msg, msg.content)
+      }
       
-    // }
+    }
+
+    //topic command
+    if(msg.content.toLowerCase().startsWith('+topic')){
+      const randomNumber = Math.floor(Math.random() * 22) + 1 
+
+      msg.channel.send(topics[randomNumber - 1])
+    }
 
     //SUGGESTIONS section
     
@@ -205,6 +255,16 @@ client.on('message', msg => {
       msg.channel.send('Suggestion added successfully :3 thank you very much')
     }
     
+    //mod-application command
+    if(msg.content.toLowerCase().startsWith('+application') && msg.channel.id === '824193985668186112'){
+      const modApplicationEmbed = new Discord.MessageEmbed()
+      .setColor("#E7BB00")
+      .setAuthor(msg.author.username, msg.author.displayAvatarURL())
+      .setDescription(msg.content.slice(12))
+      client.channels.cache.get('824195526085705729').send(modApplicationEmbed);
+      msg.channel.send('application added successfully :3 you will get a response soon')
+    }
+
     //REPORT SECTION
 
     //report command 
@@ -331,11 +391,29 @@ client.on('message', msg => {
 
     }
 
-    //chatbot command
-    if(msg.content.toLowerCase().startsWith('+chatbot')){
-      
-      chatBot(msg, msg.content.slice(8))
+    //news command
+    //turned off becoz api has limited requests
+    // if(msg.content.toLowerCase().startsWith('+news') && newsToday.length > 0){
+    //   const newsEmbed = new Discord.MessageEmbed()
+    //   .setColor('#E7BB00')
+    //   .setTitle("Today's News")
+    //   newsToday.forEach(news => {
+    //     newsEmbed.addField(news.title, news.url)
+    //   })
+    //   msg.channel.send(newsEmbed);
+    // }
+    
+    //  EVENTS SECTION
+    //event-req command
+    if(msg.content.toLowerCase().startsWith('+event add') && msg.content.length > 9){
+      const eventAddEmbed = new Discord.MessageEmbed()
+      .setColor("#E7BB00")
+      .setAuthor(msg.author.username, msg.author.displayAvatarURL())
+      .setDescription(msg.content.slice(10))
+      client.channels.cache.get('824195526085705729').send(eventAddEmbed);
+      msg.channel.send('event application added successfully :3 you will get a response soon')
     }
+    
 })
 //welcome message
 client.on('guildMemberAdd', member => {
