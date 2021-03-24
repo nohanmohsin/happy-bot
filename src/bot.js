@@ -5,8 +5,7 @@ var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept"
 var date = new Date();
 var mnth = monthNames[date.getMonth()];
 var dt = date.getDate();
-var yr = date.getFullYear();
-
+var yr = date.getFullYea
 var seconds = date.getSeconds();
 var minutes = date.getMinutes();
 var hour = date.getHours();
