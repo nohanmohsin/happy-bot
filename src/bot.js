@@ -17,7 +17,7 @@ hour = hour ? hour : 12;
 minutes = minutes < 10 ? '0'+minutes : minutes;
 
 const botToken=process.env.BOT_TOKEN;
-
+const realBotToken=process.env.BOT_TOKEN2;
 let newsToday = []
 
 const topics = [
@@ -66,7 +66,7 @@ client.on('message', msg => {
       const helpEmbed = new Discord.MessageEmbed()
       .setColor('#E7BB00')
       .setDescription('to be able to check all the commands in the sections use ``+help [section name]``\n eg.``+help fun``')
-      .setTitle('Zero Bot Commands')
+      .setTitle('The Happy Bot Commands')
       
       .addFields(
         { name: `🎈**Fun Commands/fun**
@@ -346,7 +346,7 @@ client.on('message', msg => {
             errors: ['time']
           })
           .then(collected => {
-            console.log(randomNumber);
+            
             
             if(collected.first().content == randomNumber){
               
@@ -444,4 +444,4 @@ client.on('messageReactionAdd', (reaction, user) => {
   }
 })
   
-client.login(botToken);
+client.login(realBotToken);
