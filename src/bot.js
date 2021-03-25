@@ -413,6 +413,31 @@ client.on('message', msg => {
       msg.channel.send('event application added successfully :3 you will get a response soon')
     }
     
+    //ROLEPLAY SECTION
+    //kill command
+    if(msg.content.toLowerCase().startsWith('+kill') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} killed ${msg.mentions.users.first()}\n https://tenor.com/view/kill-smack-anime-gif-9955653 `)
+    }
+
+    //kiss command
+    if(msg.content.toLowerCase().startsWith('+kiss') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} kissed ${msg.mentions.users.first()}\n https://tenor.com/view/kiss-anime-cute-kawaii-gif-13843260`)
+    }
+
+    //shout command
+    if(msg.content.toLowerCase().startsWith('+shout') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} shouted at ${msg.mentions.users.first()}\n https://tenor.com/view/love-lab-anime-frustrated-raging-rage-gif-7329767`)
+    }
+
+    //pat command
+    if(msg.content.toLowerCase().startsWith('+pat') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} patted ${msg.mentions.users.first()}\n https://tenor.com/view/pat-pat-head-thats-okay-anime-gif-14751753`)
+    }
+
+    //hug command
+    if(msg.content.toLowerCase().startsWith('+hug') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} hugged ${msg.mentions.users.first()}\n https://tenor.com/view/hug-anime-gif-11074788`)
+    }
 })
 //welcome message
 client.on('guildMemberAdd', member => {
