@@ -34,6 +34,8 @@ const { tictactoe, hangman, chatBot } = require('reconlx')
 var discordjsVoicerole = require("discordjs-voicerole");
 const { default: VoiceRoleManager } = require('discordjs-voicerole');
 
+const newsApiKey=process.env.NEWS_API_KEY
+
 client.on('ready', ()=> {
     client.channels.fetch('821986130995576866')
     .then(channel => {
@@ -42,7 +44,7 @@ client.on('ready', ()=> {
     client.user.setActivity("The Happy Team", {
       type: "LISTENING"
     })
-    // fetch(`http://api.mediastack.com/v1/news?access_key=24dbc01b98da2b04eb20ede5a5ec9d38&countries=us,gb,de&date=${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`)
+    // fetch(`http://api.mediastack.com/v1/news?access_key=${newsApiKey}&countries=us,gb,de&date=${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`)
     // .then(res => res.json())
     // .then(news => {
     //   console.log(`${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`);
@@ -80,16 +82,14 @@ client.on('message', msg => {
       )
       .addField(`\u200B`,'\u200B')
       .addFields(
-        {name: `🎉**Events**`, value: `setup events or get roles to get notified for events you wanna join in
-        **⚒ in development**`, inline: true},
-        {name: `📝Suggestions`, value: `give us some suggestions to work on!!!feel free to say anything you need!!
-        **1 command**`, inline: true},
-        {name: `🕵️‍♂️Report`, value: `setup events or get roles to get notified for events you wanna join in
-        **1 command**`, inline: true}
-      )
-      // .addFields(
         
-      // )
+        {name: `📝Suggestions`, value: `*give us some suggestions to work on!!!feel free to say anything you need!!*
+        **2 commands**`, inline: true},
+        {name: `🕵️‍♂️Report`, value: `*setup events or get roles to get notified for events you wanna join in*
+        **1 command**`, inline: true}, 
+        {name: `🎭 Roleplay`, value: '*got some roleplay commands in here too*\n **7 commands**', inline: true}
+      )
+      
       msg.channel.send(helpEmbed)
     }
 
@@ -135,6 +135,41 @@ client.on('message', msg => {
       .addField('1. ``+info server``', 'get to know more about our server by using this command')
       .addField('2. ``+info mod``', 'learn about our current staff members')
       .addField('3. ``+news``', 'learn about the global news ( currently turned off)')
+    }
+
+    //help suggest command 
+    if(msg.content.toLowerCase().startsWith('+help suggest')){
+      const suggestHelpEmbed= new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Suggest commands')
+      .setDescription('suggest something to the server staff')
+      .addField('1. ``+suggest {suggestion}``', 'with this you can send your suggestion to the staff')
+      .addField('2. ``+application {your application}``', 'with this command you can send an application to be our staff')
+      msg.channel.send(suggestHelpEmbed)
+    }
+
+    //help report command
+    if(msg.content.toLowerCase().startsWith('+help report')){
+      const reportHelpEmbed = new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Report commands')
+      .addField('``+report {user}``', 'report a user with this command')
+      msg.channel.send(reportHelpEmbed)
+    }
+
+    //help roleplay command
+    if(msg.content.toLowerCase().startsWith('+help roleplay')){
+      const roleplayHelpEmbed= new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Roleplay commands')
+      .addField('1. ``+kill {mention}``', '\u200B')
+      .addField('2. ``+kiss {mention}``', '\u200B')
+      .addField('3. ``+shout {mention}``', '\u200B')
+      .addField('4. ``+pat {mention}``', '\u200B')
+      .addField('5. ``+hug {mention}``', '\u200B')
+      .addField('6. ``+stab {mention}``', '\u200B')
+      .addField('7. ``+bonk {mention}``', '\u200B')
+      msg.channel.send(roleplayHelpEmbed)
     }
     //avatar command
     if (msg.content.toLowerCase() === '+avatar') {
@@ -437,6 +472,16 @@ client.on('message', msg => {
     //hug command
     if(msg.content.toLowerCase().startsWith('+hug') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} hugged ${msg.mentions.users.first()}\n https://tenor.com/view/hug-anime-gif-11074788`)
+    }
+
+    //stab command
+    if(msg.content.toLowerCase().startsWith('+stab') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} stabbed ${msg.mentions.users.first()}\n https://tenor.com/view/excel-saga-stabby-stab-stab-fustrated-anime-gif-14178229`)
+    }
+
+    //bonk command
+    if(msg.content.toLowerCase().startsWith('+bonk') && msg.mentions.users.first()){
+      msg.channel.send(`${msg.author} bonked ${msg.mentions.users.first()}\n https://tenor.com/view/jujutsu-kaisen-bonk-anime-hammer-nobara-gif-20256156`)
     }
 })
 //welcome message
