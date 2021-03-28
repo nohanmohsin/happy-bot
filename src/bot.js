@@ -19,6 +19,8 @@ const botToken=process.env.BOT_TOKEN;
 const realBotToken=process.env.BOT_TOKEN2;
 let newsToday = []
 
+const prefix = '+';
+
 const topics = [
   'Who was your best friend in elementary school?', 'How often do you check your phone?', 'Records, tapes, CDs, MP3s, streaming. Which did you grow up with? What is good and bad about each?', 'What would you want your last meal to be if you were on death row?', 'What is your guilty pleasure?', 'What was the biggest thing you have ever won?', 'What are your plans for this weekend?', 'What did you do on your last vacation?', 'How much do you plan for the future?', 'What do you think about game shows? Do you have a favorite one?', 'Where is the most relaxing place you have been?', 'When was the last time you worked incredibly hard?', 'What foods do you absolutely hate?', 'What is your favorite cuisine or type of food?', 'What kind of interior do you like a restaurant to have?  ', 'Do you prefer traveling alone or with a group?', 'Who is your oldest friend? Where did you meet them?', 'Which season are you most active in?  ', 'What movie scene choked you up the most?', 'Do you prefer to go off the beaten path when you travel?', 'Who is your favorite athlete?'
 ]
@@ -27,20 +29,27 @@ const Discord = require('discord.js')
 const client = new Discord.Client({
     partials: ['MESSAGE', 'REACTION', 'CHANNEL']
 });
+
+
 //games modules
 const { tictactoe, hangman, chatBot } = require('reconlx')
 
 //voice-channel modules
 var discordjsVoicerole = require("discordjs-voicerole");
 const { default: VoiceRoleManager } = require('discordjs-voicerole');
+//music distube
+
+const DisTube = require('distube');
+const distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 
 const newsApiKey=process.env.NEWS_API_KEY
 
 client.on('ready', ()=> {
     client.channels.fetch('821986130995576866')
     .then(channel => {
-        channel.send("Hello there!");
+      channel.send("Hello there!");
     })
+    
     client.user.setActivity("The Happy Team", {
       type: "LISTENING"
     })
@@ -135,6 +144,7 @@ client.on('message', msg => {
       .addField('1. ``+info server``', 'get to know more about our server by using this command')
       .addField('2. ``+info mod``', 'learn about our current staff members')
       .addField('3. ``+news``', 'learn about the global news ( currently turned off)')
+      msg.channel.send(infoHelpEmbed)
     }
 
     //help suggest command 
@@ -448,6 +458,48 @@ client.on('message', msg => {
       msg.channel.send('event application added successfully :3 you will get a response soon')
     }
     
+    //event announcement
+    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '822075908231659550')){
+      const eventEmbed = new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      let filter = (user) => {
+        return user.author.id === msg.author.id
+      }
+      msg.channel.send('enter only the title')
+      
+      .then(sent => 
+        {
+          
+          sent.channel.awaitMessages(filter,  {
+            max: 1,
+            time: 30000,
+            errors: ['time']
+          })
+          .then(collected => {
+            
+            
+            
+              
+            sent.delete()
+            
+            eventEmbed.setTitle(collected.first().content)
+            msg.channel.send('set a description')
+            .then(awaitDescription => {
+              awaitDescription.channel.awaitMessages(filter,  {
+                max: 1,
+                time: 30000,
+                errors: ['time']
+              })
+              .then(description => {
+                eventEmbed.setDescription(description.first().content)
+                msg.channel.send(eventEmbed)
+              })
+            })
+            
+          })
+          .catch(console.error);
+        })
+    }
     //ROLEPLAY SECTION
     //kill command
     if(msg.content.toLowerCase().startsWith('+kill') && msg.mentions.users.first()){
@@ -482,6 +534,38 @@ client.on('message', msg => {
     //bonk command
     if(msg.content.toLowerCase().startsWith('+bonk') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} bonked ${msg.mentions.users.first()}\n https://tenor.com/view/jujutsu-kaisen-bonk-anime-hammer-nobara-gif-20256156`)
+    }
+
+
+    //MUSIC SECTION
+    const args = msg.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift();
+    if (command == "play")
+        distube.play(msg, args.join(" "));
+        console.log(args//music distube
+);
+
+    if (["repeat", "loop"].includes(command))
+        distube.setRepeatMode(msg, parseInt(args[0]));
+
+    if (command == "stop") {
+        distube.stop(msg);
+        msg.channel.send("Stopped the music!");
+    }
+
+    if (command == "skip")
+        distube.skip(msg);
+
+    if (command == "queue") {
+        let queue = distube.getQueue(msg);
+        msg.channel.send('Current queue:\n' + queue.songs.map((song, id) =>
+            `**${id + 1}**. ${song.name} - \`${song.formattedDuration}\``
+        ).slice(0, 10).join("\n"));
+    }
+
+    if ([`3d`, `bassboost`, `echo`, `karaoke`, `nightcore`, `vaporwave`].includes(command)) {
+        let filter = distube.setFilter(msg, command);
+        msg.channel.send("Current queue filter: " + (filter || "Off"));
     }
 })
 //welcome message
