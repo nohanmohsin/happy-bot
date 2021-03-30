@@ -31,12 +31,13 @@ const client = new Discord.Client({
 });
 
 
-//games modules
+//games
 const { tictactoe, hangman, chatBot } = require('reconlx')
 
 //voice-channel modules
 var discordjsVoicerole = require("discordjs-voicerole");
 const { default: VoiceRoleManager } = require('discordjs-voicerole');
+
 //music distube
 
 const DisTube = require('distube');
@@ -71,6 +72,7 @@ client.on('voiceStateUpdate', (old, cur) => manager.trigger(old, cur));
 
 client.on('message', msg => {
     //help command
+    let member = msg.mentions.members.first()
     if(msg.content.toLowerCase() === '+help'){
       //the embed message
       const helpEmbed = new Discord.MessageEmbed()
@@ -98,7 +100,11 @@ client.on('message', msg => {
         **1 command**`, inline: true}, 
         {name: `🎭 Roleplay`, value: '*got some roleplay commands in here too*\n **7 commands**', inline: true}
       )
-      
+      .addFields(
+        {name: '🎉Events', value: '*everything related to events*\n **2 commands**', inline:true},
+        {name: '\u200B', value: '\u200B', inline: true},
+        {name: '🎶Music', value: '*play some music!!*\n **12 commands**', inline: true}
+      )
       msg.channel.send(helpEmbed)
     }
 
@@ -180,6 +186,34 @@ client.on('message', msg => {
       .addField('6. ``+stab {mention}``', '\u200B')
       .addField('7. ``+bonk {mention}``', '\u200B')
       msg.channel.send(roleplayHelpEmbed)
+    }
+
+    //help events command
+    if(msg.content.toLowerCase().startsWith('+help event')){
+      const eventsHelpEmbed = new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Events commands')
+      .addField('1. ``+event add``', '\u200B')
+      .addField('2. ``+event announce``', 'only for mods')
+    }
+    
+    //help music command
+    if(msg.content.toLowerCase().startsWith('+help music')){
+      const musicHelpEmbed = new Discord.MessageEmbed()
+      .setColor('#E7BB00')
+      .setTitle('Music commands')
+      .addField('1. ``+play {song-name}', 'add song to queue')
+      .addField('2. ``+stop``', 'stop the music')
+      .addField('3. ``+repeat``', 'repeat the current playing song')
+      .addField('4. ``+loop``', 'loop the queue')
+      .addField('5. ``+queue``', 'view the queue')
+      .addField('6. ``+3d', 'add 3d filter to the queue')
+      .addField('7. ``+bassboost', 'add bassboost filter to the queue')
+      .addField('8. ``+echo', 'add echo filter to the queue')
+      .addField('9. ``+karaoke', 'add karaoke filter to the queue')
+      .addField('10. ``+nightcore', 'add nightcore filter to the queue')
+      .addField('11. ``+vaporwave', 'add vaporwave filter to the queue')
+      .addField('12. ``+skip', 'skip the current playing song')
     }
     //avatar command
     if (msg.content.toLowerCase() === '+avatar') {
@@ -278,6 +312,43 @@ client.on('message', msg => {
         chatBot(msg, msg.content)
       }
       
+    }
+
+    //more chatbot commands
+    if(msg.content === 'hi'){
+      msg.channel.send('hello')
+    }
+
+    if(msg.content.toLowerCase() == 'yo'){
+      msg.channel.send('yo yo!!')
+    }
+
+    if(msg.content.toLowerCase() == 'ok'){
+      msg.channel.send('oh okay')
+    }
+
+    if(msg.content.toLowerCase() == 'i hate you'){
+      msg.channel.send('why ;-;')
+    }
+
+    if(msg.content.toLowerCase() == 'hey'){
+      msg.channel.send('hello!!')
+    }
+
+    if(msg.content.toLowerCase() == 'lol'){
+      msg.channel.send('XD')
+    }
+
+    if(msg.content.toLowerCase() == 'who'){
+      msg.channel.send('idk')
+    }
+
+    if(msg.content.toLowerCase() == 'thank u'){
+      msg.channel.send('welcome')
+    }
+
+    if(msg.content.toLowerCase() == 'i love you'){
+      msg.channel.send('I love you too')
     }
 
     //topic command
@@ -408,6 +479,7 @@ client.on('message', msg => {
       })
 
     }
+
 
     //INFO SECTION
 
@@ -540,21 +612,23 @@ client.on('message', msg => {
     //MUSIC SECTION
     const args = msg.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift();
-    if (command == "play")
-        distube.play(msg, args.join(" "));
-        console.log(args//music distube
-);
+    if (command == "play"){
+      distube.play(msg, args.join(" "));
+    }
+        
 
-    if (["repeat", "loop"].includes(command))
-        distube.setRepeatMode(msg, parseInt(args[0]));
-
-    if (command == "stop") {
-        distube.stop(msg);
-        msg.channel.send("Stopped the music!");
+    if (["repeat", "loop"].includes(command)){
+      distube.setRepeatMode(msg, parseInt(args[0]));
     }
 
-    if (command == "skip")
-        distube.skip(msg);
+    if (command == "stop") {
+      distube.stop(msg);
+      msg.channel.send("Stopped the music!");
+    }
+
+    if (command == "skip"){
+      distube.skip(msg);
+    }
 
     if (command == "queue") {
         let queue = distube.getQueue(msg);
@@ -564,8 +638,8 @@ client.on('message', msg => {
     }
 
     if ([`3d`, `bassboost`, `echo`, `karaoke`, `nightcore`, `vaporwave`].includes(command)) {
-        let filter = distube.setFilter(msg, command);
-        msg.channel.send("Current queue filter: " + (filter || "Off"));
+      let filter = distube.setFilter(msg, command);
+      msg.channel.send("Current queue filter: " + (filter || "Off"));
     }
 })
 //welcome message
@@ -573,7 +647,7 @@ client.on('guildMemberAdd', member => {
     
     const channel = member.guild.channels.cache.find(ch => ch.name === 'welcome');
     if (!channel) return;
-    channel.send(`Welcome to the server, ${member}`);
+    channel.send(` WELCOME!\n Welcome to The Happy Team ${member},\n 😊 Thank you for joining`);
 });
 //react to roles
 client.on('messageReactionAdd', (reaction, user) => {
