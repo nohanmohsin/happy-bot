@@ -306,7 +306,7 @@ client.on('message', msg => {
     }
 
     //chatbot command
-    if(msg.channel.id == '824177838206353428'){
+    if(msg.channel.id == '821024044077547531'){
       if(msg.author.bot) return;
       else{
         chatBot(msg, msg.content)
@@ -361,22 +361,22 @@ client.on('message', msg => {
     //SUGGESTIONS section
     
     //suggest command
-    if(msg.content.toLowerCase().startsWith('+suggest') && msg.channel.id === '822819962594000936'){
+    if(msg.content.toLowerCase().startsWith('+suggest')){
       const suggestionEmbed = new Discord.MessageEmbed()
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(8))
-      client.channels.cache.get('822828028798697534').send(suggestionEmbed);
+      client.channels.cache.get('822031398256902144').send(suggestionEmbed);
       msg.channel.send('Suggestion added successfully :3 thank you very much')
     }
     
     //mod-application command
-    if(msg.content.toLowerCase().startsWith('+application') && msg.channel.id === '824193985668186112'){
+    if(msg.content.toLowerCase().startsWith('+application')){
       const modApplicationEmbed = new Discord.MessageEmbed()
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(12))
-      client.channels.cache.get('824195526085705729').send(modApplicationEmbed);
+      client.channels.cache.get('822031398256902144').send(modApplicationEmbed);
       msg.channel.send('application added successfully :3 you will get a response soon')
     }
 
@@ -389,7 +389,7 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(7))
-      client.channels.cache.get('822846283186044958').send(reportEmbed);
+      client.channels.cache.get('822031398256902144').send(reportEmbed);
       msg.channel.send('report added!! we are on it!!! :3')
     }
 
@@ -415,7 +415,7 @@ client.on('message', msg => {
           message: msg,
           word: data[0],
           client: client,
-          channelID: '822888420912398406',
+          channelID: '820627346402705448',
         })
         // starting the game
         hang.start()
@@ -492,21 +492,6 @@ client.on('message', msg => {
       msg.channel.send(serverInfoEmbed)
     }
 
-    //info mod command
-    if(msg.content.toLowerCase().startsWith('+info mod')){
-     
-      
-      const Members = msg.guild.members.cache.filter(mem => mem.roles.cache.find(role => role.id == '822075908231659550')).map(member => member.user.username);
-      
-      const modInfoEmbed = new Discord.MessageEmbed()
-      .setTitle('Our Current Mods and Developers')
-      .setColor('#E7BB00')
-      .setDescription(Members.join('\n'))
-      msg.channel.send(modInfoEmbed);
-      
-
-    }
-
     //news command
     //turned off becoz api has limited requests
     // if(msg.content.toLowerCase().startsWith('+news') && newsToday.length > 0){
@@ -526,12 +511,12 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(10))
-      client.channels.cache.get('824195526085705729').send(eventAddEmbed);
+      client.channels.cache.get('822031398256902144').send(eventAddEmbed);
       msg.channel.send('event application added successfully :3 you will get a response soon')
     }
     
     //event announcement
-    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '822075908231659550')){
+    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '819529264016785460')){
       const eventEmbed = new Discord.MessageEmbed()
       .setColor('#E7BB00')
       let filter = (user) => {
@@ -564,7 +549,7 @@ client.on('message', msg => {
               })
               .then(description => {
                 eventEmbed.setDescription(description.first().content)
-                msg.channel.send(eventEmbed)
+                client.channels.cache.get('824155451196440576').send(eventEmbed)
               })
             })
             
@@ -649,26 +634,5 @@ client.on('guildMemberAdd', member => {
     if (!channel) return;
     channel.send(` WELCOME!\n Welcome to The Happy Team ${member},\n 😊 Thank you for joining`);
 });
-//react to roles
-client.on('messageReactionAdd', (reaction, user) => {
-  const { name } = reaction.emoji;
-  const member = reaction.message.guild.members.cache.get(user.id);
-  if (reaction.message.id === '822027595536400385') {
-    switch (name) {
-      case '☮️':
-        member.roles.add('822075908231659550');
-        break;
-      case '🍇':
-        member.roles.add('822076031128829972');
-        break;
-      case '🍏':
-        member.roles.add('822076064892321852');
-        break;
-      case '🍑':
-        member.roles.add('822076100502749225');
-        break;
-    }
-  }
-})
   
 client.login(realBotToken);
