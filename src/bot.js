@@ -46,7 +46,7 @@ const distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true 
 const newsApiKey=process.env.NEWS_API_KEY
 
 client.on('ready', ()=> {
-    client.channels.fetch('821986130995576866')
+    client.channels.fetch('826756603986313236')
     .then(channel => {
       channel.send("Hello there!");
     })
@@ -63,7 +63,8 @@ client.on('ready', ()=> {
 })
 
 const manager = new VoiceRoleManager({
-  "821986130995576867": "824225704606040065"
+  "826758457495257168": "828171180539641886",
+  "826758976514293760": '828173656852398140'
 });
 
 //using this event to give roles to members when they join vc
@@ -96,7 +97,7 @@ client.on('message', msg => {
         
         {name: `📝Suggestions`, value: `*give us some suggestions to work on!!!feel free to say anything you need!!*
         **2 commands**`, inline: true},
-        {name: `🕵️‍♂️Report`, value: `*setup events or get roles to get notified for events you wanna join in*
+        {name: `🕵️‍♂️Report`, value: `*report someone with this*
         **1 command**`, inline: true}, 
         {name: `🎭 Roleplay`, value: '*got some roleplay commands in here too*\n **7 commands**', inline: true}
       )
@@ -306,7 +307,7 @@ client.on('message', msg => {
     }
 
     //chatbot command
-    if(msg.channel.id == '821024044077547531'){
+    if(msg.channel.id == '826756759699062796'){
       if(msg.author.bot) return;
       else{
         chatBot(msg, msg.content)
@@ -366,7 +367,7 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(8))
-      client.channels.cache.get('822031398256902144').send(suggestionEmbed);
+      client.channels.cache.get('828169572480712734').send(suggestionEmbed);
       msg.channel.send('Suggestion added successfully :3 thank you very much')
     }
     
@@ -376,7 +377,7 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(12))
-      client.channels.cache.get('822031398256902144').send(modApplicationEmbed);
+      client.channels.cache.get('828169478687686707').send(modApplicationEmbed);
       msg.channel.send('application added successfully :3 you will get a response soon')
     }
 
@@ -389,7 +390,7 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(7))
-      client.channels.cache.get('822031398256902144').send(reportEmbed);
+      client.channels.cache.get('828169384974876672').send(reportEmbed);
       msg.channel.send('report added!! we are on it!!! :3')
     }
 
@@ -415,7 +416,7 @@ client.on('message', msg => {
           message: msg,
           word: data[0],
           client: client,
-          channelID: '820627346402705448',
+          channelID: '828168759461150720',
         })
         // starting the game
         hang.start()
@@ -511,12 +512,12 @@ client.on('message', msg => {
       .setColor("#E7BB00")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(10))
-      client.channels.cache.get('822031398256902144').send(eventAddEmbed);
+      client.channels.cache.get('827223170477195264').send(eventAddEmbed);
       msg.channel.send('event application added successfully :3 you will get a response soon')
     }
     
     //event announcement
-    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '819529264016785460')){
+    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '826438977174503494')){
       const eventEmbed = new Discord.MessageEmbed()
       .setColor('#E7BB00')
       let filter = (user) => {
@@ -549,7 +550,7 @@ client.on('message', msg => {
               })
               .then(description => {
                 eventEmbed.setDescription(description.first().content)
-                client.channels.cache.get('824155451196440576').send(eventEmbed)
+                client.channels.cache.get('827223173648089179').send(eventEmbed)
               })
             })
             
