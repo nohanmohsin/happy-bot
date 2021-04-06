@@ -77,9 +77,9 @@ client.on('message', msg => {
     if(msg.content.toLowerCase() === '+help'){
       //the embed message
       const helpEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setDescription('to be able to check all the commands in the sections use ``+help [section name]``\n eg.``+help fun``')
-      .setTitle('The Happy Bot Commands')
+      .setTitle('The SSparkle Bot Commands')
       
       .addFields(
         { name: `🎈**Fun Commands/fun**
@@ -113,7 +113,7 @@ client.on('message', msg => {
     if(msg.content.toLowerCase() === '+help games'){
       //the embed message
       const helpGameEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setDescription('few games to play and pass the time')
       .setTitle('Game Commands')
       .addField('1. ``+tictactoe {mention}``', 'play tictactoe with a friend....**second player is necessary**')
@@ -126,7 +126,7 @@ client.on('message', msg => {
     if(msg.content.toLowerCase() === '+help fun'){
       //the embed message
       const helpFunEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setDescription('all the fun commands you can use are stated below:')
       .setTitle('Fun Commands')
       .addField('1. ``+avatar [mention]``', 'use this to see your avatar or the users avatar if you pinged someone')
@@ -145,7 +145,7 @@ client.on('message', msg => {
     if(msg.content.toLowerCase().startsWith('+help info')){
       //embed message 
       const infoHelpEmbed= new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Info commands')
       .setDescription('get to know more about our server or our staff or get some news for today')
       .addField('1. ``+info server``', 'get to know more about our server by using this command')
@@ -157,7 +157,7 @@ client.on('message', msg => {
     //help suggest command 
     if(msg.content.toLowerCase().startsWith('+help suggest')){
       const suggestHelpEmbed= new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Suggest commands')
       .setDescription('suggest something to the server staff')
       .addField('1. ``+suggest {suggestion}``', 'with this you can send your suggestion to the staff')
@@ -168,7 +168,7 @@ client.on('message', msg => {
     //help report command
     if(msg.content.toLowerCase().startsWith('+help report')){
       const reportHelpEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Report commands')
       .addField('``+report {user}``', 'report a user with this command')
       msg.channel.send(reportHelpEmbed)
@@ -177,7 +177,7 @@ client.on('message', msg => {
     //help roleplay command
     if(msg.content.toLowerCase().startsWith('+help roleplay')){
       const roleplayHelpEmbed= new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Roleplay commands')
       .addField('1. ``+kill {mention}``', '\u200B')
       .addField('2. ``+kiss {mention}``', '\u200B')
@@ -192,29 +192,31 @@ client.on('message', msg => {
     //help events command
     if(msg.content.toLowerCase().startsWith('+help event')){
       const eventsHelpEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Events commands')
-      .addField('1. ``+event add``', '\u200B')
-      .addField('2. ``+event announce``', 'only for mods')
+      .addField('1. ``+rr add``', '\u200B')
+      .addField('2. ``+rr announce``', 'only for mods')
+      msg.channel.send(eventsHelpEmbed)
     }
     
     //help music command
     if(msg.content.toLowerCase().startsWith('+help music')){
       const musicHelpEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Music commands')
       .addField('1. ``+play {song-name}', 'add song to queue')
       .addField('2. ``+stop``', 'stop the music')
       .addField('3. ``+repeat``', 'repeat the current playing song')
       .addField('4. ``+loop``', 'loop the queue')
       .addField('5. ``+queue``', 'view the queue')
-      .addField('6. ``+3d', 'add 3d filter to the queue')
-      .addField('7. ``+bassboost', 'add bassboost filter to the queue')
-      .addField('8. ``+echo', 'add echo filter to the queue')
-      .addField('9. ``+karaoke', 'add karaoke filter to the queue')
-      .addField('10. ``+nightcore', 'add nightcore filter to the queue')
-      .addField('11. ``+vaporwave', 'add vaporwave filter to the queue')
-      .addField('12. ``+skip', 'skip the current playing song')
+      .addField('6. ``+3d``', 'add 3d filter to the queue')
+      .addField('7. ``+bassboost``', 'add bassboost filter to the queue')
+      .addField('8. ``+echo``', 'add echo filter to the queue')
+      .addField('9. ``+karaoke``', 'add karaoke filter to the queue')
+      .addField('10. ``+nightcore``', 'add nightcore filter to the queue')
+      .addField('11. ``+vaporwave``', 'add vaporwave filter to the queue')
+      .addField('12. ``+skip``', 'skip the current playing song')
+      msg.channel.send(musicHelpEmbed)
     }
     //avatar command
     if (msg.content.toLowerCase() === '+avatar') {
@@ -272,7 +274,7 @@ client.on('message', msg => {
       .then(data => {
         if(data.nsfw !== true){
           const memeEmbed = new Discord.MessageEmbed()
-          .setColor('#E7BB00')
+          .setColor('#0000FF')
           .setTitle(data.title)
           .setDescription(`r/${data.subreddit}`)
           .setImage(data.url);
@@ -284,7 +286,7 @@ client.on('message', msg => {
           .then(res => res.json())
           .then(meme => {
             const sfwMemeEmbed = new Discord.MessageEmbed()
-            .setColor('#E7BB00')
+            .setColor('#0000FF')
             .setTitle(meme.title)
             .setDescription(`r/${meme.subreddit}`)
             .setImage(meme.url);
@@ -364,7 +366,7 @@ client.on('message', msg => {
     //suggest command
     if(msg.content.toLowerCase().startsWith('+suggest')){
       const suggestionEmbed = new Discord.MessageEmbed()
-      .setColor("#E7BB00")
+      .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(8))
       client.channels.cache.get('828169572480712734').send(suggestionEmbed);
@@ -374,7 +376,7 @@ client.on('message', msg => {
     //mod-application command
     if(msg.content.toLowerCase().startsWith('+application')){
       const modApplicationEmbed = new Discord.MessageEmbed()
-      .setColor("#E7BB00")
+      .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(12))
       client.channels.cache.get('828169478687686707').send(modApplicationEmbed);
@@ -387,7 +389,7 @@ client.on('message', msg => {
     if(msg.content.toLowerCase().startsWith('+report') && msg.mentions.users.first() && msg.content.split(/\s+/).join('').length > 10 + msg.mentions.users.first().id.length){
       msg.channel.send('yes')
       const reportEmbed = new Discord.MessageEmbed()
-      .setColor("#E7BB00")
+      .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(7))
       client.channels.cache.get('828169384974876672').send(reportEmbed);
@@ -443,7 +445,7 @@ client.on('message', msg => {
         options.insert(randomNumber - 1, data.results[0].correct_answer); 
 
         const triviaEmbed = new Discord.MessageEmbed()
-        .setColor('#E7BB00')
+        .setColor('#0000FF')
         .setDescription(data.results[0].question)
         .addField(`1. ${options[0]}`, '⠀')
         .addField(`2. ${options[1]}`, '⠀')
@@ -487,7 +489,7 @@ client.on('message', msg => {
     //info server command
     if(msg.content.toLowerCase().startsWith('+info server')){
       const serverInfoEmbed= new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       .setTitle('Info about our server')
       .setDescription(`₊˚꒷꒦Have a great time ${msg.author}  here in The Happy Team . . . feel free to chat with others! also please don't forget to read the rules!^^. you can chat with others in revamping. . . ! and you can even try to level up by chatting! or you can grind from different bots! there are a lot you can do in revamping. . . ! I got to go now see ya and have fun!!₊˚꒷꒦`)
       msg.channel.send(serverInfoEmbed)
@@ -497,7 +499,7 @@ client.on('message', msg => {
     //turned off becoz api has limited requests
     // if(msg.content.toLowerCase().startsWith('+news') && newsToday.length > 0){
     //   const newsEmbed = new Discord.MessageEmbed()
-    //   .setColor('#E7BB00')
+    //   .setColor('#0000FF')
     //   .setTitle("Today's News")
     //   newsToday.forEach(news => {
     //     newsEmbed.addField(news.title, news.url)
@@ -507,9 +509,9 @@ client.on('message', msg => {
     
     //  EVENTS SECTION
     //event-req command
-    if(msg.content.toLowerCase().startsWith('+event add') && msg.content.length > 9){
+    if(msg.content.toLowerCase().startsWith('+rr add') && msg.content.length > 7){
       const eventAddEmbed = new Discord.MessageEmbed()
-      .setColor("#E7BB00")
+      .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
       .setDescription(msg.content.slice(10))
       client.channels.cache.get('827223170477195264').send(eventAddEmbed);
@@ -517,9 +519,9 @@ client.on('message', msg => {
     }
     
     //event announcement
-    if(msg.content.toLowerCase().startsWith('+event announce') && msg.member.roles.cache.find(r => r.id === '826438977174503494')){
+    if(msg.content.toLowerCase().startsWith('+rr announce') && msg.member.roles.cache.find(r => r.id === '826438977174503494')){
       const eventEmbed = new Discord.MessageEmbed()
-      .setColor('#E7BB00')
+      .setColor('#0000FF')
       let filter = (user) => {
         return user.author.id === msg.author.id
       }
@@ -550,7 +552,7 @@ client.on('message', msg => {
               })
               .then(description => {
                 eventEmbed.setDescription(description.first().content)
-                client.channels.cache.get('827223173648089179').send(eventEmbed)
+                client.channels.cache.get('826746066140790795').send(eventEmbed)
               })
             })
             
