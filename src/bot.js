@@ -309,7 +309,7 @@ client.on('message', msg => {
     }
 
     //chatbot command
-    if(msg.channel.id == '826756759699062796'){
+    if(msg.channel.id == '836860001657159729'){
       if(msg.author.bot) return;
       else{
         chatBot(msg, msg.content)
