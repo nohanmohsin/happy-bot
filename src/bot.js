@@ -51,9 +51,11 @@ client.on('ready', ()=> {
       channel.send("Hello there!");
     })
     
-    client.user.setActivity("The Happy Team", {
-      type: "LISTENING"
-    })
+    client.user.setActivity("sparkle town", {
+      type: "STREAMING",
+      url: "https://www.youtube.com/channel/UCs2jPCyRZR107YEGTyHz1-Q"
+    });
+
     // fetch(`http://api.mediastack.com/v1/news?access_key=${newsApiKey}&countries=us,gb,de&date=${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`)
     // .then(res => res.json())
     // .then(news => {
