@@ -53,7 +53,7 @@ client.on('ready', ()=> {
     
     client.user.setActivity("sparkle town", {
       type: "STREAMING",
-      url: "https://www.youtube.com/channel/UCs2jPCyRZR107YEGTyHz1-Q"
+      url: "https://www.twitch.tv/discord"
     });
 
     // fetch(`http://api.mediastack.com/v1/news?access_key=${newsApiKey}&countries=us,gb,de&date=${yr}-${monthNames.indexOf(mnth) + 1}-${dt}`)
