@@ -19,7 +19,7 @@ const botToken=process.env.BOT_TOKEN;
 const realBotToken=process.env.BOT_TOKEN2;
 let newsToday = []
 
-const prefix = '+';
+const prefix = '~';
 
 const topics = [
   'Who was your best friend in elementary school?', 'How often do you check your phone?', 'Records, tapes, CDs, MP3s, streaming. Which did you grow up with? What is good and bad about each?', 'What would you want your last meal to be if you were on death row?', 'What is your guilty pleasure?', 'What was the biggest thing you have ever won?', 'What are your plans for this weekend?', 'What did you do on your last vacation?', 'How much do you plan for the future?', 'What do you think about game shows? Do you have a favorite one?', 'Where is the most relaxing place you have been?', 'When was the last time you worked incredibly hard?', 'What foods do you absolutely hate?', 'What is your favorite cuisine or type of food?', 'What kind of interior do you like a restaurant to have?  ', 'Do you prefer traveling alone or with a group?', 'Who is your oldest friend? Where did you meet them?', 'Which season are you most active in?  ', 'What movie scene choked you up the most?', 'Do you prefer to go off the beaten path when you travel?', 'Who is your favorite athlete?'
@@ -76,11 +76,11 @@ client.on('voiceStateUpdate', (old, cur) => manager.trigger(old, cur));
 client.on('message', msg => {
     //help command
     let member = msg.mentions.members.first()
-    if(msg.content.toLowerCase() === '+help'){
+    if(msg.content.toLowerCase() === '~help'){
       //the embed message
       const helpEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
-      .setDescription('to be able to check all the commands in the sections use ``+help [section name]``\n eg.``+help fun``')
+      .setDescription('to be able to check all the commands in the sections use ``~help [section name]``\n eg.``~help fun``')
       .setTitle('The SSparkle Bot Commands')
       
       .addFields(
@@ -112,133 +112,133 @@ client.on('message', msg => {
     }
 
     //help game command
-    if(msg.content.toLowerCase() === '+help games'){
+    if(msg.content.toLowerCase() === '~help games'){
       //the embed message
       const helpGameEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setDescription('few games to play and pass the time')
       .setTitle('Game Commands')
-      .addField('1. ``+tictactoe {mention}``', 'play tictactoe with a friend....**second player is necessary**')
-      .addField('2. ``+hangman``', 'play hangman 🪂')
-      .addField('3. ``+trivia``', 'play some trivia and check your big brain XD')
+      .addField('1. ``~tictactoe {mention}``', 'play tictactoe with a friend....**second player is necessary**')
+      .addField('2. ``~hangman``', 'play hangman 🪂')
+      .addField('3. ``~trivia``', 'play some trivia and check your big brain XD')
       msg.channel.send(helpGameEmbed)
     }
     
     //help fun command
-    if(msg.content.toLowerCase() === '+help fun'){
+    if(msg.content.toLowerCase() === '~help fun'){
       //the embed message
       const helpFunEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setDescription('all the fun commands you can use are stated below:')
       .setTitle('Fun Commands')
-      .addField('1. ``+avatar [mention]``', 'use this to see your avatar or the users avatar if you pinged someone')
-      .addField('2. ``+clock``', 'use this to check the time in dhaka, bangladesh')
-      .addField('3. ``+joke``', 'get a random joke \:)')
-      .addField('4. ``+pun``', 'get a random pun \;)')
-      .addField('5. ``+fact``', 'get a random fact')
-      .addField('6. ``+meme``', 'get a meme to laugh at')
-      .addField('7. ``+catpic``', 'get a cute catpic')
+      .addField('1. ``~avatar [mention]``', 'use this to see your avatar or the users avatar if you pinged someone')
+      .addField('2. ``~clock``', 'use this to check the time in dhaka, bangladesh')
+      .addField('3. ``~joke``', 'get a random joke \:)')
+      .addField('4. ``~pun``', 'get a random pun \;)')
+      .addField('5. ``~fact``', 'get a random fact')
+      .addField('6. ``~meme``', 'get a meme to laugh at')
+      .addField('7. ``~catpic``', 'get a cute catpic')
       .addField(`8. go chat with our bot in the chatbot channel :3`)
-      .addField('9, ``+topic``', 'get a random topic if you are bored or you have nothing to talk about ')
+      .addField('9, ``~topic``', 'get a random topic if you are bored or you have nothing to talk about ')
       msg.channel.send(helpFunEmbed)
     }
 
     //help info command
-    if(msg.content.toLowerCase().startsWith('+help info')){
+    if(msg.content.toLowerCase().startsWith('~help info')){
       //embed message 
       const infoHelpEmbed= new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Info commands')
       .setDescription('get to know more about our server or our staff or get some news for today')
-      .addField('1. ``+info server``', 'get to know more about our server by using this command')
-      .addField('2. ``+info mod``', 'learn about our current staff members')
-      .addField('3. ``+news``', 'learn about the global news ( currently turned off)')
+      .addField('1. ``~info server``', 'get to know more about our server by using this command')
+      .addField('2. ``~info mod``', 'learn about our current staff members')
+      .addField('3. ``~news``', 'learn about the global news ( currently turned off)')
       msg.channel.send(infoHelpEmbed)
     }
 
     //help suggest command 
-    if(msg.content.toLowerCase().startsWith('+help suggest')){
+    if(msg.content.toLowerCase().startsWith('~help suggest')){
       const suggestHelpEmbed= new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Suggest commands')
       .setDescription('suggest something to the server staff')
-      .addField('1. ``+suggest {suggestion}``', 'with this you can send your suggestion to the staff')
-      .addField('2. ``+application {your application}``', 'with this command you can send an application to be our staff')
+      .addField('1. ``~suggest {suggestion}``', 'with this you can send your suggestion to the staff')
+      .addField('2. ``~application {your application}``', 'with this command you can send an application to be our staff')
       msg.channel.send(suggestHelpEmbed)
     }
 
     //help report command
-    if(msg.content.toLowerCase().startsWith('+help report')){
+    if(msg.content.toLowerCase().startsWith('~help report')){
       const reportHelpEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Report commands')
-      .addField('``+report {user}``', 'report a user with this command')
+      .addField('``~report {user}``', 'report a user with this command')
       msg.channel.send(reportHelpEmbed)
     }
 
     //help roleplay command
-    if(msg.content.toLowerCase().startsWith('+help roleplay')){
+    if(msg.content.toLowerCase().startsWith('~help roleplay')){
       const roleplayHelpEmbed= new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Roleplay commands')
-      .addField('1. ``+kill {mention}``', '\u200B')
-      .addField('2. ``+kiss {mention}``', '\u200B')
-      .addField('3. ``+shout {mention}``', '\u200B')
-      .addField('4. ``+pat {mention}``', '\u200B')
-      .addField('5. ``+hug {mention}``', '\u200B')
-      .addField('6. ``+stab {mention}``', '\u200B')
-      .addField('7. ``+bonk {mention}``', '\u200B')
+      .addField('1. ``~kill {mention}``', '\u200B')
+      .addField('2. ``~kiss {mention}``', '\u200B')
+      .addField('3. ``~shout {mention}``', '\u200B')
+      .addField('4. ``~pat {mention}``', '\u200B')
+      .addField('5. ``~hug {mention}``', '\u200B')
+      .addField('6. ``~stab {mention}``', '\u200B')
+      .addField('7. ``~bonk {mention}``', '\u200B')
       msg.channel.send(roleplayHelpEmbed)
     }
 
     //help events command
-    if(msg.content.toLowerCase().startsWith('+help event')){
+    if(msg.content.toLowerCase().startsWith('~help event')){
       const eventsHelpEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Events commands')
-      .addField('1. ``+rr add``', '\u200B')
-      .addField('2. ``+rr announce``', 'only for mods')
+      .addField('1. ``~rr add``', '\u200B')
+      .addField('2. ``~rr announce``', 'only for mods')
       msg.channel.send(eventsHelpEmbed)
     }
     
     //help music command
-    if(msg.content.toLowerCase().startsWith('+help music')){
+    if(msg.content.toLowerCase().startsWith('~help music')){
       const musicHelpEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Music commands')
-      .addField('1. ``+play {song-name}', 'add song to queue')
-      .addField('2. ``+stop``', 'stop the music')
-      .addField('3. ``+repeat``', 'repeat the current playing song')
-      .addField('4. ``+loop``', 'loop the queue')
-      .addField('5. ``+queue``', 'view the queue')
-      .addField('6. ``+3d``', 'add 3d filter to the queue')
-      .addField('7. ``+bassboost``', 'add bassboost filter to the queue')
-      .addField('8. ``+echo``', 'add echo filter to the queue')
-      .addField('9. ``+karaoke``', 'add karaoke filter to the queue')
-      .addField('10. ``+nightcore``', 'add nightcore filter to the queue')
-      .addField('11. ``+vaporwave``', 'add vaporwave filter to the queue')
-      .addField('12. ``+skip``', 'skip the current playing song')
+      .addField('1. ``~play {song-name}', 'add song to queue')
+      .addField('2. ``~stop``', 'stop the music')
+      .addField('3. ``~repeat``', 'repeat the current playing song')
+      .addField('4. ``~loop``', 'loop the queue')
+      .addField('5. ``~queue``', 'view the queue')
+      .addField('6. ``~3d``', 'add 3d filter to the queue')
+      .addField('7. ``~bassboost``', 'add bassboost filter to the queue')
+      .addField('8. ``~echo``', 'add echo filter to the queue')
+      .addField('9. ``~karaoke``', 'add karaoke filter to the queue')
+      .addField('10. ``~nightcore``', 'add nightcore filter to the queue')
+      .addField('11. ``~vaporwave``', 'add vaporwave filter to the queue')
+      .addField('12. ``~skip``', 'skip the current playing song')
       msg.channel.send(musicHelpEmbed)
     }
     //avatar command
-    if (msg.content.toLowerCase() === '+avatar') {
+    if (msg.content.toLowerCase() === '~avatar') {
         // Send the user's avatar URL
         msg.channel.send(msg.author.displayAvatarURL());
     }
     //if avatar command has a ping
-    if(msg.mentions.users.first() && msg.content.toLowerCase().startsWith('+avatar')){
+    if(msg.mentions.users.first() && msg.content.toLowerCase().startsWith('~avatar')){
         let user;
         user = msg.mentions.users.first();
         msg.channel.send(user.displayAvatarURL());
     }
 
     //time in dhaka
-    if(msg.content.toLowerCase() === '+clock'){
+    if(msg.content.toLowerCase() === '~clock'){
         msg.channel.send('Dhaka : ' + mnth + ' ' + dt + ' '+ yr + ' ' + hour + ':'+ minutes + ':'+ seconds + ' ' + ampm);
     }
 
     //joke command
-    if(msg.content.toLowerCase() === '+joke'){
+    if(msg.content.toLowerCase() === '~joke'){
       //fetching from an api
       fetch('https://official-joke-api.appspot.com/random_joke')
       .then(res => res.json())
@@ -249,7 +249,7 @@ client.on('message', msg => {
     }
 
     //pun command
-    if(msg.content.toLowerCase() === '+pun'){
+    if(msg.content.toLowerCase() === '~pun'){
       //fetching the pun
       fetch('https://v2.jokeapi.dev/joke/Pun?blacklistFlags=nsfw,religious,political,racist,sexist&type=twopart')
       .then(res => res.json())
@@ -260,7 +260,7 @@ client.on('message', msg => {
     }
 
     //facts command
-    if(msg.content.toLowerCase() === '+fact'){
+    if(msg.content.toLowerCase() === '~fact'){
       fetch('https://useless-facts.sameerkumar.website/api')
       .then(res => res.json())
       .then(fact => {
@@ -269,7 +269,7 @@ client.on('message', msg => {
     }
 
     //meme command
-    if(msg.content.toLowerCase() === '+meme'){
+    if(msg.content.toLowerCase() === '~meme'){
       
       fetch('https://meme-api.herokuapp.com/gimme')
       .then(res => res.json())
@@ -300,7 +300,7 @@ client.on('message', msg => {
     }
 
     //catpics command
-    if(msg.content.toLowerCase().startsWith('+catpic')){
+    if(msg.content.toLowerCase().startsWith('~catpic')){
       fetch('https://api.thecatapi.com/v1/images/search')
       .then(res => res.json())
       .then(data => {
@@ -357,7 +357,7 @@ client.on('message', msg => {
     }
 
     //topic command
-    if(msg.content.toLowerCase().startsWith('+topic')){
+    if(msg.content.toLowerCase().startsWith('~topic')){
       const randomNumber = Math.floor(Math.random() * 22) + 1 
 
       msg.channel.send(topics[randomNumber - 1])
@@ -366,7 +366,7 @@ client.on('message', msg => {
     //SUGGESTIONS section
     
     //suggest command
-    if(msg.content.toLowerCase().startsWith('+suggest')){
+    if(msg.content.toLowerCase().startsWith('~suggest')){
       const suggestionEmbed = new Discord.MessageEmbed()
       .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
@@ -376,7 +376,7 @@ client.on('message', msg => {
     }
     
     //mod-application command
-    if(msg.content.toLowerCase().startsWith('+application')){
+    if(msg.content.toLowerCase().startsWith('~application')){
       const modApplicationEmbed = new Discord.MessageEmbed()
       .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
@@ -388,7 +388,7 @@ client.on('message', msg => {
     //REPORT SECTION
 
     //report command 
-    if(msg.content.toLowerCase().startsWith('+report') && msg.mentions.users.first() && msg.content.split(/\s+/).join('').length > 10 + msg.mentions.users.first().id.length){
+    if(msg.content.toLowerCase().startsWith('~report') && msg.mentions.users.first() && msg.content.split(/\s+/).join('').length > 10 + msg.mentions.users.first().id.length){
       msg.channel.send('yes')
       const reportEmbed = new Discord.MessageEmbed()
       .setColor("#0000FF")
@@ -401,7 +401,7 @@ client.on('message', msg => {
     //GAMES SECTION
 
     //tictactoe command
-    if(msg.content.toLowerCase().startsWith('+tictactoe') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~tictactoe') && msg.mentions.users.first()){
       const game = new tictactoe({
         message: msg,
         player_two: msg.mentions.members.first(),
@@ -411,7 +411,7 @@ client.on('message', msg => {
     }
     
     //hangman command
-    if(msg.content.toLowerCase().startsWith('+hangman') ){
+    if(msg.content.toLowerCase().startsWith('~hangman') ){
 
       fetch('https://random-word-api.herokuapp.com/word?number=1')
       .then(res => res.json())
@@ -430,7 +430,7 @@ client.on('message', msg => {
       
     }
     //trivia game ;-;
-    if(msg.content.toLowerCase().startsWith('+trivia')){
+    if(msg.content.toLowerCase().startsWith('~trivia')){
       
       fetch('https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple')
       .then(res => res.json())
@@ -489,7 +489,7 @@ client.on('message', msg => {
     //INFO SECTION
 
     //info server command
-    if(msg.content.toLowerCase().startsWith('+info server')){
+    if(msg.content.toLowerCase().startsWith('~info server')){
       const serverInfoEmbed= new Discord.MessageEmbed()
       .setColor('#0000FF')
       .setTitle('Info about our server')
@@ -511,7 +511,7 @@ client.on('message', msg => {
     
     //  EVENTS SECTION
     //event-req command
-    if(msg.content.toLowerCase().startsWith('+rr add') && msg.content.length > 7){
+    if(msg.content.toLowerCase().startsWith('~rr add') && msg.content.length > 7){
       const eventAddEmbed = new Discord.MessageEmbed()
       .setColor("#0000FF")
       .setAuthor(msg.author.username, msg.author.displayAvatarURL())
@@ -521,7 +521,7 @@ client.on('message', msg => {
     }
     
     //event announcement
-    if(msg.content.toLowerCase().startsWith('+rr announce') && msg.member.roles.cache.find(r => r.id === '826438977174503494')){
+    if(msg.content.toLowerCase().startsWith('~rr announce') && msg.member.roles.cache.find(r => r.id === '826438977174503494')){
       const eventEmbed = new Discord.MessageEmbed()
       .setColor('#0000FF')
       let filter = (user) => {
@@ -564,37 +564,37 @@ client.on('message', msg => {
     }
     //ROLEPLAY SECTION
     //kill command
-    if(msg.content.toLowerCase().startsWith('+kill') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~kill') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} killed ${msg.mentions.users.first()}\n https://tenor.com/view/kill-smack-anime-gif-9955653 `)
     }
 
     //kiss command
-    if(msg.content.toLowerCase().startsWith('+kiss') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~kiss') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} kissed ${msg.mentions.users.first()}\n https://tenor.com/view/kiss-anime-cute-kawaii-gif-13843260`)
     }
 
     //shout command
-    if(msg.content.toLowerCase().startsWith('+shout') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~shout') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} shouted at ${msg.mentions.users.first()}\n https://tenor.com/view/love-lab-anime-frustrated-raging-rage-gif-7329767`)
     }
 
     //pat command
-    if(msg.content.toLowerCase().startsWith('+pat') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~pat') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} patted ${msg.mentions.users.first()}\n https://tenor.com/view/pat-pat-head-thats-okay-anime-gif-14751753`)
     }
 
     //hug command
-    if(msg.content.toLowerCase().startsWith('+hug') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~hug') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} hugged ${msg.mentions.users.first()}\n https://tenor.com/view/hug-anime-gif-11074788`)
     }
 
     //stab command
-    if(msg.content.toLowerCase().startsWith('+stab') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~stab') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} stabbed ${msg.mentions.users.first()}\n https://tenor.com/view/excel-saga-stabby-stab-stab-fustrated-anime-gif-14178229`)
     }
 
     //bonk command
-    if(msg.content.toLowerCase().startsWith('+bonk') && msg.mentions.users.first()){
+    if(msg.content.toLowerCase().startsWith('~bonk') && msg.mentions.users.first()){
       msg.channel.send(`${msg.author} bonked ${msg.mentions.users.first()}\n https://tenor.com/view/jujutsu-kaisen-bonk-anime-hammer-nobara-gif-20256156`)
     }
 
