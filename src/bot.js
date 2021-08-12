@@ -554,7 +554,7 @@ client.on('message', msg => {
               })
               .then(description => {
                 eventEmbed.setDescription(description.first().content)
-                client.channels.cache.get('833325015218651136').send(eventEmbed)
+                client.channels.cache.get('859062947871195136').send(eventEmbed)
               })
             })
             
